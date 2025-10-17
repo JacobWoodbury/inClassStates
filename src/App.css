@@ -2,11 +2,13 @@
   max-width: 100%;
   margin: 10rem;
   padding: 2rem;
+}
+main{
   text-align: center;
 }
-
 .icon{
   height: 4em;
+  border-radius: 50%;
 }
 .farm-img {
   height: 4em;
@@ -14,23 +16,35 @@
   will-change: filter;
   transition: filter 300ms;
 }
-.flowerImage {
-  height: 4em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
+
 .farm div{
   border: 4px dashed rgb(48, 35, 35);
   background-color: rgb(100, 64, 64);
   height: 10rem;
-  width: 9rem;
+  width: 10.5rem;
 }
 .farm{
   display: flex;
   flex-direction: row;
-  max-width: 75rem;
+  
   flex-wrap: wrap;
+}
+.interface{
+  display: flex;
+  flex-direction: row;
+}
+.interface div{
+  background-color: rgb(60, 83, 41);
+  border-radius: 15%;
+  width: 33%;
+  height: 20rem;
+  margin: 1rem;
+}
+.play{
+ 
+}
+.description{
+  padding-bottom: 2rem;
 }
 .footer{
  
@@ -38,25 +52,13 @@
   width: 100%;
   background-color: #1f2d35;
   display: flex;
-  left:0;
+
   padding: 2rem;
- box-shadow: 10px 0px 15px 10px #1f2c33;
+  box-shadow: 10px 0px 15px 10px #1f2c33;
 }
 .header{
   background-color: rgb(33, 44, 65);
   border-radius: 25%;
   box-shadow: 10px 6px 10px #1f2c33;
   padding: 2rem;
-}
-.bag{
-  background-color: rgb(60, 83, 41);
-  border-radius: 15%;
-  width: 12rem;
-  height: 20rem;
-  display: inline-block;
-  margin-right: 5rem;
-
-}
-.play{
-  display: flex;
 }

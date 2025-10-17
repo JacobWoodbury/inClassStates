@@ -77,25 +77,41 @@ export default function Game(){
     
     return(
         <>
-            <div className="info">
-                <div className="description">This is our game, click a seed, then a square to plant in it.</div>
-                <p>Currently selected seed: {currentSeed.name}</p>{<img className="icon" src={currentSeed.iconSrc} alt={currentSeed.name + " icons"}/>}
-                
-            </div>
-            <div className="play">
-                 <section className = "bag">
-                    <h2>Bag of seeds</h2>
-                    <button className = "selectSeed" onClick={()=>{updateCurrentSeed(wheat)}}>Wheat</button>
-                    <button className = "selectSeed" onClick={()=>{updateCurrentSeed(flower)}}>Flower</button>
-                    <button className = "selectSeed" onClick={()=>{updateCurrentSeed(tree)}}>Tree</button>
-                </section>
-                <section className="farm">
-                    {mappedFarmItems}  
-                </section>
-               
+            <main>
+                <div className="info">
+                    <div className="description">This is our game, click a seed, then a square to plant in it.</div>
+                    
+                    
                 </div>
-                <button onClick={()=>{addDirt()}}>Plow new plot</button>
-            
+                <section className="interface">
+                    <div className = "bag">
+                        <h2>Bag of seeds</h2>
+                
+                        <button className = "selectSeed" onClick={()=>{updateCurrentSeed(wheat)}}>Wheat</button>
+                        <button className = "selectSeed" onClick={()=>{updateCurrentSeed(flower)}}>Flower</button>
+                        <button className = "selectSeed" onClick={()=>{updateCurrentSeed(tree)}}>Tree</button>
+                        <p>Currently selected seed: {currentSeed.name}</p>
+                        {<img className="icon" src={currentSeed.iconSrc} alt={currentSeed.name + " icons"}/>}
+                    </div>
+                    <div>
+                        <h2>Shop?</h2>
+                        <button onClick={()=>{addDirt()}}>New plot</button>
+                    </div>
+                    <div>
+                        <h2>tools?</h2>
+                    </div>
+                </section>
+                
+                
+                <div className="play">
+                    
+                    <section className="farm">
+                        {mappedFarmItems}  
+                    </section>
+                
+                    </div>
+                
+            </main>
         </>
     )
 }
