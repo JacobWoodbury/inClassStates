@@ -21,7 +21,7 @@ main{
   border: 4px dashed rgb(48, 35, 35);
   background-color: rgb(100, 64, 64);
   height: 10rem;
-  width: 10.5rem;
+  width: 10.64rem;
 }
 .farm{
   display: flex;
@@ -47,18 +47,14 @@ main{
   padding-bottom: 2rem;
 }
 .footer{
- 
-  
-  width: 100%;
   background-color: #1f2d35;
-  display: flex;
-
   padding: 2rem;
-  box-shadow: 10px 0px 15px 10px #1f2c33;
+  box-shadow: 5px 0px 15px 5px #0a1d27;
+  border-radius: 4%;
 }
 .header{
-  background-color: rgb(33, 44, 65);
-  border-radius: 25%;
-  box-shadow: 10px 6px 10px #1f2c33;
+  background-color: rgba(44, 99, 73, 0.541);
+  
+  box-shadow: 10px 6px 10px #151b1f;
   padding: 2rem;
 }
