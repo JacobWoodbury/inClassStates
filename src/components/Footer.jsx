@@ -1,5 +1,5 @@
 export default function Footer(){
     return(
-        <h1>This is a footer</h1>
+        <h3 className="footer">By Jacob and Xavier: for Educational purposes</h3>
     )
 }

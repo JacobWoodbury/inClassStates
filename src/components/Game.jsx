@@ -1,73 +1,101 @@
 import React from "react";
 
 export default function Game(){
+    const dirt ={
+        name:"dirt",
+        iconSrc: "/dirt.png",
+        seedlingSrc: "/dirt.png",
+        grownSrc: "/dirt.png"
+    }
+    const wheat = {
+        name: "Wheat",
+        iconSrc: "/wheatIcon.jpg",
+        seedlingSrc: "/sprout.png",
+        grownSrc: "/wheat-grown.png"
+    }
+    const flower = {
+        name: "Flower",
+        iconSrc: "/flower-icon.jpg",
+        seedlingSrc: "/sprout.png",
+        grownSrc: "/flower-bud.png"
+    }
+    const tree = {
+        name: "Tree",
+        iconSrc: "/tree-icon.jpg",
+        seedlingSrc: "/sprout.png",
+        grownSrc: "/tree-grown.png"
+    }
+
     const seedling = <img className="sproutImage" src="/sprout.png" alt="sprout icons"/>
     const flowerImage = <img className="flowerImage" src="/flower-bud.png" alt="flower"/>
-    const [bagItems, setBagItems] = React.useState(["Wheat", "Flower"]);
     const [farmItems, setFarmItems] = React.useState([
-            {position: 0, block: "dirt"},
-            {position: 1, block: "dirt"},
-            {position: 2, block: "dirt"}
+            {position: 0, block: dirt},
+            {position: 1, block: dirt},
+            {position: 2, block: dirt}
         ]);
-    const [currentSeed, setCurrentSeed] = React.useState("Wheat");
+    const [currentSeed, setCurrentSeed] = React.useState(wheat);
 
-
+    
 
     const mappedFarmItems = farmItems.map((item)=>{
-        if(item.block === "dirt"){
+        if(item.block.name === "dirt"){
             return(<div key={item.position}>
                 <button className="plantButton" onClick={()=>{addSeed(item.position,currentSeed)}}>Plant a seed</button>
             </div>)
         }else{
-            const imgType = item.block === "Flower" ? flowerImage : seedling;
-            return (<div key={item.position}><p>{item.block}</p>{imgType}</div>)
+            const imgType = ""
+            //item.block === "Flower" ? flowerImage : seedling;
+            return (<div key={item.position}><p>{item.block.name}</p><img className="farm-img" src={item.block.grownSrc} alt={item.block.name}></img></div>)
         }
     })
         
-
+    function addDirt(){
+        setFarmItems((prev)=>[...prev,{position: prev.length, block: dirt}])
+    }
     function addSeed(location, seed) {   
         setFarmItems((prev)=>{
-           
-            
             const newGrid = [...prev]
             newGrid[location] = {position: location, block: seed, button: <button className="plantButton" onClick={()=>{addSeed(location)}}>Plant a seed</button>}
             return newGrid
         })
     }
 
-    function plant(current){
-        return(<li>{current}</li>)
+    
+    function updateCurrentSeed(plant){
+        switch (plant.name){
+            case "Wheat":
+                setCurrentSeed(wheat);
+                break;
+            case "Flower":
+                setCurrentSeed(flower);
+                break;
+            case "Tree":
+                setCurrentSeed(tree);
+                break;
+        }
     }
     
-    function wheat() {
-        setCurrentSeed("Wheat")
-    }
-
-    function flower() {
-        setCurrentSeed("Flower")
-    }
-
     return(
         <>
-            <div className="description">This is our game, click a square to plant in it.</div>
-            <p>Currently selected seed: {currentSeed}</p>
-            <section className="farm">
-                {mappedFarmItems} 
+            <div className="info">
+                <div className="description">This is our game, click a seed, then a square to plant in it.</div>
+                <p>Currently selected seed: {currentSeed.name}</p>{<img className="icon" src={currentSeed.iconSrc} alt={currentSeed.name + " icons"}/>}
                 
-                
-            </section>
-            <section className="bag">
-                <ul>
-
-                </ul>
-            </section>
-
-            <section className = "bag">
-                <h2>Bag of seeds</h2>
-                <button className = "selectSeed" onClick={wheat}>Wheat</button>
-                <button className = "selectSeed" onClick={flower}>Flower</button>
-            </section>
-
+            </div>
+            <div className="play">
+                 <section className = "bag">
+                    <h2>Bag of seeds</h2>
+                    <button className = "selectSeed" onClick={()=>{updateCurrentSeed(wheat)}}>Wheat</button>
+                    <button className = "selectSeed" onClick={()=>{updateCurrentSeed(flower)}}>Flower</button>
+                    <button className = "selectSeed" onClick={()=>{updateCurrentSeed(tree)}}>Tree</button>
+                </section>
+                <section className="farm">
+                    {mappedFarmItems}  
+                </section>
+               
+                </div>
+                <button onClick={()=>{addDirt()}}>Plow new plot</button>
+            
         </>
     )
 }

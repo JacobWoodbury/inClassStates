@@ -1,5 +1,5 @@
 export default function Header(){
     return(
-        <h1>This is a header</h1>
+        <h1 className="header">J&X Farming</h1>
     )
 }
