@@ -1,17 +1,38 @@
 import React from "react";
 
 export default function Game(){
-    const seedling = <a href="https://www.flaticon.com/free-icons/sprout" title="sprout icons"></a>
-    const [bagItems, setBagItems] = React.useState(["wheat", "flower"]);
-    const [farmItems, setFarmItems] = React.useState([]);
-    const [currentSeed, setCurrentSeed] = React.useState();
+    const seedling = <img className="sproutImage" src="/sprout.png" alt="sprout icons"/>
+    const flowerImage = <img className="flowerImage" src="/flower-bud.png" alt="flower"/>
+    const [bagItems, setBagItems] = React.useState(["Wheat", "Flower"]);
+    const [farmItems, setFarmItems] = React.useState([
+            {position: 0, block: "dirt"},
+            {position: 1, block: "dirt"},
+            {position: 2, block: "dirt"}
+        ]);
+    const [currentSeed, setCurrentSeed] = React.useState("Wheat");
 
-    const mappedFarmItems = farmItems.map((item) => (plant(item)))
 
-    function addSeed() {   
-        setFarmItems((prev) => {
-           return([...prev, currentSeed])
-        })  
+
+    const mappedFarmItems = farmItems.map((item)=>{
+        if(item.block === "dirt"){
+            return(<div key={item.position}>
+                <button className="plantButton" onClick={()=>{addSeed(item.position,currentSeed)}}>Plant a seed</button>
+            </div>)
+        }else{
+            const imgType = item.block === "Flower" ? flowerImage : seedling;
+            return (<div key={item.position}><p>{item.block}</p>{imgType}</div>)
+        }
+    })
+        
+
+    function addSeed(location, seed) {   
+        setFarmItems((prev)=>{
+           
+            
+            const newGrid = [...prev]
+            newGrid[location] = {position: location, block: seed, button: <button className="plantButton" onClick={()=>{addSeed(location)}}>Plant a seed</button>}
+            return newGrid
+        })
     }
 
     function plant(current){
@@ -29,11 +50,10 @@ export default function Game(){
     return(
         <>
             <div className="description">This is our game, click a square to plant in it.</div>
-
+            <p>Currently selected seed: {currentSeed}</p>
             <section className="farm">
-                <button className="plantButton" onClick={addSeed}>Plant a seed</button>
-                <p>{currentSeed}</p>
-                {mappedFarmItems}
+                {mappedFarmItems} 
+                
                 
             </section>
             <section className="bag">
