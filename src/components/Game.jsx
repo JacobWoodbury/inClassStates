@@ -26,8 +26,7 @@ export default function Game(){
         grownSrc: "/tree-grown.png"
     }
 
-    const seedling = <img className="sproutImage" src="/sprout.png" alt="sprout icons"/>
-    const flowerImage = <img className="flowerImage" src="/flower-bud.png" alt="flower"/>
+   
     const [farmItems, setFarmItems] = React.useState([
             {position: 0, block: dirt},
             {position: 1, block: dirt},
@@ -43,8 +42,6 @@ export default function Game(){
                 <button className="plantButton" onClick={()=>{addSeed(item.position,currentSeed)}}>Plant a seed</button>
             </div>)
         }else{
-            const imgType = ""
-            //item.block === "Flower" ? flowerImage : seedling;
             return (<div key={item.position}><p>{item.block.name}</p><img className="farm-img" src={item.block.grownSrc} alt={item.block.name}></img></div>)
         }
     })
@@ -91,7 +88,7 @@ export default function Game(){
                         <button className = "selectSeed" onClick={()=>{updateCurrentSeed(flower)}}>Flower</button>
                         <button className = "selectSeed" onClick={()=>{updateCurrentSeed(tree)}}>Tree</button>
                         <p>Currently selected seed: {currentSeed.name}</p>
-                        {<img className="icon" src={currentSeed.iconSrc} alt={currentSeed.name + " icons"}/>}
+                        {<img className="icon" src={currentSeed.iconSrc} alt={currentSeed.name + " icon"}/>}
                     </div>
                     <div>
                         <h2>Shop?</h2>
