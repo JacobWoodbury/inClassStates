@@ -57,7 +57,19 @@ export default function Game(){
     function addDirt(){
         setFarmItems((prev)=>[...prev,{position: prev.length, block: dirt}])
     }
-    function addSeed(location, seed) {   
+    function addSeed(location, seed) { 
+        
+            switch (seed.name){
+                case "Wheat":
+                    setWheatCount((prev) => prev + 1);
+                    break;
+                case "Flower":
+                    setFlowerCount((prev) => prev + 1);
+                    break;
+                case "Tree":
+                    setTreeCount((prev) => prev + 1);
+                    break;
+            }
         setFarmItems((prev)=>{
             const newGrid = [...prev]
             newGrid[location] = {position: location, block: seed}
@@ -90,28 +102,14 @@ export default function Game(){
                 break;
         }
     }
-    function checkWin(items){
-        items.forEach((item)=>{
-            switch (item.block.name){
-                case "Wheat":
-                    setWheatCount((prev) => prev + 1);
-                    break;
-                case "Flower":
-                    setFlowerCount((prev) => prev + 1);
-                    break;
-                case "Tree":
-                    setTreeCount((prev) => prev + 1);
-                    break;
-            }
-        })
-         
-                if(wheatCount === 2 && flowerCount === 2 && treeCount === 1){setIsWinner(true)}
+    function checkWin(){
+                if(wheatCount > 1 && flowerCount > 1 && treeCount > 0){setIsWinner(true)}
                 console.log("wheat: " + wheatCount)
                 console.log(isWinner)
     }
     return(
         <>
-            {isWinner? <h1>You Win</h1> :
+            {isWinner? <div><button onClick={()=>{setIsWinner(false)}}>Restart</button><h1>You Win</h1></div> :
             <main>
                 <div className="info">
                     <div className="description">This is our game, click a seed, then a square to plant in it.</div>
