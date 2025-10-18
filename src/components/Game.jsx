@@ -28,9 +28,9 @@ export default function Game(){
 
    
     const [farmItems, setFarmItems] = React.useState([
-            {position: 0, block: dirt},
-            {position: 1, block: dirt},
-            {position: 2, block: dirt}
+            {position: 0, block: dirt, isWatered: false},
+            {position: 1, block: dirt, isWatered: false},
+            {position: 2, block: dirt, isWatered: false}
         ]);
     const [currentSeed, setCurrentSeed] = React.useState(wheat);
 
@@ -40,9 +40,10 @@ export default function Game(){
         if(item.block.name === "dirt"){
             return(<div key={item.position}>
                 <button className="plantButton" onClick={()=>{addSeed(item.position,currentSeed)}}>Plant a seed</button>
+                <img className = "farm-img" src = {item.block.iconSrc} alt = {item.block.name}></img>
             </div>)
         }else{
-            return (<div key={item.position}><p>{item.block.name}</p><img className="farm-img" src={item.block.grownSrc} alt={item.block.name}></img></div>)
+            return (<div key={item.position}><p>{item.block.name}</p><img className="farm-img" src={(item.isWatered ? item.block.grownSrc : item.block.seedlingSrc)} alt={item.block.name}></img></div>)
         }
     })
         
@@ -57,6 +58,14 @@ export default function Game(){
         })
     }
 
+    function waterPlants() {
+        setFarmItems((prev) => {
+            return (prev.map((item) => ({
+                ...item,
+                isWatered: true
+            })))
+        })
+    }
     
     function updateCurrentSeed(plant){
         switch (plant.name){
@@ -95,7 +104,8 @@ export default function Game(){
                         <button onClick={()=>{addDirt()}}>New plot</button>
                     </div>
                     <div>
-                        <h2>tools?</h2>
+                        <h2>Tools?</h2>
+                        <button className="selectSeed" onClick = {waterPlants}>Water all Plants</button>
                     </div>
                 </section>
                 
