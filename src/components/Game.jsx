@@ -26,7 +26,14 @@ export default function Game(){
         grownSrc: "/tree-grown.png"
     }
 
-   
+
+  
+    const [wheatCount, setWheatCount] = React.useState(0)
+    const [flowerCount, setFlowerCount] = React.useState(0)
+    const [treeCount, setTreeCount] = React.useState(0)
+    const [isWinner, setIsWinner] = React.useState(false)
+
+
     const [farmItems, setFarmItems] = React.useState([
             {position: 0, block: dirt, isWatered: false},
             {position: 1, block: dirt, isWatered: false},
@@ -53,18 +60,21 @@ export default function Game(){
     function addSeed(location, seed) {   
         setFarmItems((prev)=>{
             const newGrid = [...prev]
-            newGrid[location] = {position: location, block: seed, button: <button className="plantButton" onClick={()=>{addSeed(location)}}>Plant a seed</button>}
+            newGrid[location] = {position: location, block: seed}
             return newGrid
         })
     }
 
     function waterPlants() {
+
         setFarmItems((prev) => {
-            return (prev.map((item) => ({
-                ...item,
-                isWatered: true
-            })))
+            return (prev.map((item) => {
+                return {...item,
+                isWatered: true}
+            }))
+
         })
+        checkWin(farmItems)
     }
     
     function updateCurrentSeed(plant){
@@ -80,9 +90,28 @@ export default function Game(){
                 break;
         }
     }
-    
+    function checkWin(items){
+        items.forEach((item)=>{
+            switch (item.block.name){
+                case "Wheat":
+                    setWheatCount((prev) => prev + 1);
+                    break;
+                case "Flower":
+                    setFlowerCount((prev) => prev + 1);
+                    break;
+                case "Tree":
+                    setTreeCount((prev) => prev + 1);
+                    break;
+            }
+        })
+         
+                if(wheatCount === 2 && flowerCount === 2 && treeCount === 1){setIsWinner(true)}
+                console.log("wheat: " + wheatCount)
+                console.log(isWinner)
+    }
     return(
         <>
+            {isWinner? <h1>You Win</h1> :
             <main>
                 <div className="info">
                     <div className="description">This is our game, click a seed, then a square to plant in it.</div>
@@ -118,7 +147,7 @@ export default function Game(){
                 
                     </div>
                 
-            </main>
+            </main>}
         </>
     )
 }
