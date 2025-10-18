@@ -3,27 +3,27 @@ import React from "react";
 export default function Game(){
     const dirt ={
         name:"dirt",
-        iconSrc: "/dirt.png",
-        seedlingSrc: "/dirt.png",
-        grownSrc: "/dirt.png"
+        iconSrc: "./dirt.png",
+        seedlingSrc: "./dirt.png",
+        grownSrc: "./dirt.png"
     }
     const wheat = {
         name: "Wheat",
-        iconSrc: "/wheatIcon.jpg",
-        seedlingSrc: "/sprout.png",
-        grownSrc: "/wheat-grown.png"
+        iconSrc: "./wheatIcon.jpg",
+        seedlingSrc: "./sprout.png",
+        grownSrc: "./wheat-grown.png"
     }
     const flower = {
         name: "Flower",
-        iconSrc: "/flower-icon.jpg",
-        seedlingSrc: "/sprout.png",
-        grownSrc: "/flower-bud.png"
+        iconSrc: "./flower-icon.jpg",
+        seedlingSrc: "./sprout.png",
+        grownSrc: "./flower-bud.png"
     }
     const tree = {
         name: "Tree",
-        iconSrc: "/tree-icon.jpg",
-        seedlingSrc: "/sprout.png",
-        grownSrc: "/tree-grown.png"
+        iconSrc: "./tree-icon.jpg",
+        seedlingSrc: "./sprout.png",
+        grownSrc: "./tree-grown.png"
     }
   
     const [wheatCount, setWheatCount] = React.useState(0)
