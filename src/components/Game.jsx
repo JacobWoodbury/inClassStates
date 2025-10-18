@@ -25,14 +25,11 @@ export default function Game(){
         seedlingSrc: "/sprout.png",
         grownSrc: "/tree-grown.png"
     }
-
-
   
     const [wheatCount, setWheatCount] = React.useState(0)
     const [flowerCount, setFlowerCount] = React.useState(0)
     const [treeCount, setTreeCount] = React.useState(0)
     const [isWinner, setIsWinner] = React.useState(false)
-
 
     const [farmItems, setFarmItems] = React.useState([
             {position: 0, block: dirt, isWatered: false},
@@ -40,8 +37,6 @@ export default function Game(){
             {position: 2, block: dirt, isWatered: false}
         ]);
     const [currentSeed, setCurrentSeed] = React.useState(wheat);
-
-    
 
     const mappedFarmItems = farmItems.map((item)=>{
         if(item.block.name === "dirt"){
@@ -57,8 +52,8 @@ export default function Game(){
     function addDirt(){
         setFarmItems((prev)=>[...prev,{position: prev.length, block: dirt}])
     }
+
     function addSeed(location, seed) { 
-        
             switch (seed.name){
                 case "Wheat":
                     setWheatCount((prev) => prev + 1);
@@ -78,7 +73,6 @@ export default function Game(){
     }
 
     function waterPlants() {
-
         setFarmItems((prev) => {
             return (prev.map((item) => {
                 return {...item,
@@ -102,19 +96,29 @@ export default function Game(){
                 break;
         }
     }
-    function checkWin(){
-                if(wheatCount > 1 && flowerCount > 1 && treeCount > 0){setIsWinner(true)}
-                console.log("wheat: " + wheatCount)
-                console.log(isWinner)
+
+    function checkWin() {
+        if(wheatCount > 1 && flowerCount > 1 && treeCount > 0){setIsWinner(true)}
+        console.log("wheat: " + wheatCount)
+        console.log(isWinner)
     }
+
     return(
         <>
-            {isWinner? <div><button onClick={()=>{setIsWinner(false)}}>Restart</button><h1>You Win</h1></div> :
+            {isWinner? <div><button onClick={()=>{
+                setIsWinner(false)
+                setWheatCount(0)
+                setFlowerCount(0)
+                setTreeCount(0)
+                setFarmItems([{position: 0, block: dirt, isWatered: false}, 
+                    {position: 1, block: dirt, isWatered: false}, 
+                    {position: 2, block: dirt, isWatered: false}]
+                )
+                setCurrentSeed(wheat)
+            }}>Restart</button><h1>You Win</h1></div> :
             <main>
                 <div className="info">
-                    <div className="description">This is our game, click a seed, then a square to plant in it.</div>
-                    
-                    
+                    <div className="description">This is our game, click a seed, then a square to plant in it.</div>          
                 </div>
                 <section className="interface">
                     <div className = "bag">
@@ -134,8 +138,7 @@ export default function Game(){
                         <h2>Tools?</h2>
                         <button className="selectSeed" onClick = {waterPlants}>Water all Plants</button>
                     </div>
-                </section>
-                
+                </section>   
                 
                 <div className="play">
                     
@@ -143,8 +146,7 @@ export default function Game(){
                         {mappedFarmItems}  
                     </section>
                 
-                    </div>
-                
+                    </div> 
             </main>}
         </>
     )
