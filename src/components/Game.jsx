@@ -1,30 +1,7 @@
 import React from "react";
-
+import plantData from "../assets/plantData";
 export default function Game(){
-    const dirt ={
-        name:"dirt",
-        iconSrc: "./dirt.png",
-        seedlingSrc: "./dirt.png",
-        grownSrc: "./dirt.png"
-    }
-    const wheat = {
-        name: "Wheat",
-        iconSrc: "./wheatIcon.jpg",
-        seedlingSrc: "./sprout.png",
-        grownSrc: "./wheat-grown.png"
-    }
-    const flower = {
-        name: "Flower",
-        iconSrc: "./flower-icon.jpg",
-        seedlingSrc: "./sprout.png",
-        grownSrc: "./flower-bud.png"
-    }
-    const tree = {
-        name: "Tree",
-        iconSrc: "./tree-icon.jpg",
-        seedlingSrc: "./sprout.png",
-        grownSrc: "./tree-grown.png"
-    }
+   
   
     const [wheatCount, setWheatCount] = React.useState(0)
     const [flowerCount, setFlowerCount] = React.useState(0)
@@ -32,11 +9,11 @@ export default function Game(){
     const [isWinner, setIsWinner] = React.useState(false)
 
     const [farmItems, setFarmItems] = React.useState([
-            {position: 0, block: dirt, isWatered: false},
-            {position: 1, block: dirt, isWatered: false},
-            {position: 2, block: dirt, isWatered: false}
+            {position: 0, block: plantData.dirt, isWatered: false},
+            {position: 1, block: plantData.dirt, isWatered: false},
+            {position: 2, block: plantData.dirt, isWatered: false}
         ]);
-    const [currentSeed, setCurrentSeed] = React.useState(wheat);
+    const [currentSeed, setCurrentSeed] = React.useState(plantData.wheat);
 
     const mappedFarmItems = farmItems.map((item)=>{
         if(item.block.name === "dirt"){
@@ -50,7 +27,7 @@ export default function Game(){
     })
         
     function addDirt(){
-        setFarmItems((prev)=>[...prev,{position: prev.length, block: dirt}])
+        setFarmItems((prev)=>[...prev,{position: prev.length, block: plantData.dirt}])
     }
 
     function addSeed(location, seed) { 
@@ -86,13 +63,13 @@ export default function Game(){
     function updateCurrentSeed(plant){
         switch (plant.name){
             case "Wheat":
-                setCurrentSeed(wheat);
+                setCurrentSeed(plantData.wheat);
                 break;
             case "Flower":
-                setCurrentSeed(flower);
+                setCurrentSeed(plantData.flower);
                 break;
             case "Tree":
-                setCurrentSeed(tree);
+                setCurrentSeed(plantData.tree);
                 break;
         }
     }
@@ -110,11 +87,11 @@ export default function Game(){
                 setWheatCount(0)
                 setFlowerCount(0)
                 setTreeCount(0)
-                setFarmItems([{position: 0, block: dirt, isWatered: false}, 
-                    {position: 1, block: dirt, isWatered: false}, 
-                    {position: 2, block: dirt, isWatered: false}]
+                setFarmItems([{position: 0, block: plantData.dirt, isWatered: false}, 
+                    {position: 1, block: plantData.dirt, isWatered: false}, 
+                    {position: 2, block: plantData.dirt, isWatered: false}]
                 )
-                setCurrentSeed(wheat)
+                setCurrentSeed(plantData.wheat)
             }}>Restart</button><h1>You Win</h1></div> :
             <main>
                 <div className="info">
@@ -124,9 +101,9 @@ export default function Game(){
                     <div className = "bag">
                         <h2>Bag of seeds</h2>
                 
-                        <button className = "selectSeed" onClick={()=>{updateCurrentSeed(wheat)}}>Wheat</button>
-                        <button className = "selectSeed" onClick={()=>{updateCurrentSeed(flower)}}>Flower</button>
-                        <button className = "selectSeed" onClick={()=>{updateCurrentSeed(tree)}}>Tree</button>
+                        <button className = "selectSeed" onClick={()=>{updateCurrentSeed(plantData.wheat)}}>Wheat</button>
+                        <button className = "selectSeed" onClick={()=>{updateCurrentSeed(plantData.flower)}}>Flower</button>
+                        <button className = "selectSeed" onClick={()=>{updateCurrentSeed(plantData.tree)}}>Tree</button>
                         <p>Currently selected seed: {currentSeed.name}</p>
                         {<img className="icon" src={currentSeed.iconSrc} alt={currentSeed.name + " icon"}/>}
                     </div>
