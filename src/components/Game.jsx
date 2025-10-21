@@ -2,6 +2,7 @@ import React from "react";
 import plantData from "../assets/plantData";
 import Winner from "./Winner.jsx"
 import Interface from "./Interface.jsx";
+import Farm from "./Farm.jsx";
 
 export default function Game(){
    
@@ -17,17 +18,6 @@ export default function Game(){
             {position: 2, block: plantData.dirt, isWatered: false}
         ]);
     const [currentSeed, setCurrentSeed] = React.useState(plantData.wheat);
-
-    const mappedFarmItems = farmItems.map((item)=>{
-        if(item.block.name === "dirt"){
-            return(<div key={item.position}>
-                <button className="plantButton" onClick={()=>{addSeed(item.position,currentSeed)}}>Plant a seed</button>
-                <img className = "farm-img" src = {item.block.iconSrc} alt = {item.block.name}></img>
-            </div>)
-        }else{
-            return (<div key={item.position}><p>{item.block.name}</p><img className="farm-img" src={(item.isWatered ? item.block.grownSrc : item.block.seedlingSrc)} alt={item.block.name}></img></div>)
-        }
-    })
         
     function addDirt(){
         setFarmItems((prev)=>[...prev,{position: prev.length, block: plantData.dirt}])
@@ -99,21 +89,18 @@ export default function Game(){
         <>
             {isWinner? <div> <Winner func={showWinPage}/></div> :
             <main>
-                <div className="info">
-                    <div className="description">This is our game, click a seed, then a square to plant in it.</div>          
+                <div className="description">
+                    <h3>This is our game, click a seed, then a square to plant in it.</h3>
                 </div>
                 <section className="interface">
-                    <Interface updateCurrentSeed = {updateCurrentSeed} addDirt = {addDirt} waterPlants = {waterPlants} currentSeed = {currentSeed}/>
-                    
+                    <Interface updateCurrentSeed = {updateCurrentSeed} addDirt = {addDirt} waterPlants = {waterPlants} currentSeed = {currentSeed}/>        
                 </section>   
                 
                 <div className="play">
-                    
                     <section className="farm">
-                        {mappedFarmItems}  
+                        <Farm farmItems={farmItems} func={addSeed} currentSeed={currentSeed}/>  
                     </section>
-                
-                    </div> 
+                </div> 
             </main>}
         </>
     )
