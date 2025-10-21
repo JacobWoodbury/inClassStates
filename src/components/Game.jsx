@@ -1,6 +1,7 @@
 import React from "react";
 import plantData from "../assets/plantData";
 import Winner from "./Winner.jsx"
+import Interface from "./Interface.jsx";
 
 export default function Game(){
    
@@ -102,23 +103,8 @@ export default function Game(){
                     <div className="description">This is our game, click a seed, then a square to plant in it.</div>          
                 </div>
                 <section className="interface">
-                    <div className = "bag">
-                        <h2>Bag of seeds</h2>
-                
-                        <button className = "selectSeed" onClick={()=>{updateCurrentSeed(plantData.wheat)}}>Wheat</button>
-                        <button className = "selectSeed" onClick={()=>{updateCurrentSeed(plantData.flower)}}>Flower</button>
-                        <button className = "selectSeed" onClick={()=>{updateCurrentSeed(plantData.tree)}}>Tree</button>
-                        <p>Currently selected seed: {currentSeed.name}</p>
-                        {<img className="icon" src={currentSeed.iconSrc} alt={currentSeed.name + " icon"}/>}
-                    </div>
-                    <div>
-                        <h2>Shop?</h2>
-                        <button onClick={()=>{addDirt()}}>New plot</button>
-                    </div>
-                    <div>
-                        <h2>Tools?</h2>
-                        <button className="selectSeed" onClick = {waterPlants}>Water all Plants</button>
-                    </div>
+                    <Interface updateCurrentSeed = {updateCurrentSeed} addDirt = {addDirt} waterPlants = {waterPlants} currentSeed = {currentSeed}/>
+                    
                 </section>   
                 
                 <div className="play">
