@@ -1,5 +1,7 @@
 import React from "react";
 import plantData from "../assets/plantData";
+import Winner from "./Winner.jsx"
+
 export default function Game(){
    
   
@@ -80,19 +82,21 @@ export default function Game(){
         console.log(isWinner)
     }
 
+    function showWinPage() {
+        setIsWinner(false)
+        setWheatCount(0)
+        setFlowerCount(0)
+        setTreeCount(0)
+        setFarmItems([{position: 0, block: plantData.dirt, isWatered: false}, 
+            {position: 1, block: plantData.dirt, isWatered: false}, 
+            {position: 2, block: plantData.dirt, isWatered: false}]
+        )
+        setCurrentSeed(plantData.wheat)
+    }
+
     return(
         <>
-            {isWinner? <div><button onClick={()=>{
-                setIsWinner(false)
-                setWheatCount(0)
-                setFlowerCount(0)
-                setTreeCount(0)
-                setFarmItems([{position: 0, block: plantData.dirt, isWatered: false}, 
-                    {position: 1, block: plantData.dirt, isWatered: false}, 
-                    {position: 2, block: plantData.dirt, isWatered: false}]
-                )
-                setCurrentSeed(plantData.wheat)
-            }}>Restart</button><h1>You Win</h1></div> :
+            {isWinner? <div> <Winner func={showWinPage}/></div> :
             <main>
                 <div className="info">
                     <div className="description">This is our game, click a seed, then a square to plant in it.</div>          
