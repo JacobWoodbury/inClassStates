@@ -2,7 +2,7 @@ export default function Farm({farmItems, func, currentSeed}) {
     const mappedFarmItems = farmItems.map((item)=>{
         if(item.block.name === "dirt"){
             return(<div key={item.position}>
-                <button className="plantButton" onClick={() => (func(item.position, currentSeed))}>Plant a seed</button>
+                <button className="plantButton" onClick={func(item.position, currentSeed)}>Plant a seed</button>
                 <img className = "farm-img" src = {item.block.iconSrc} alt = {item.block.name}></img>
             </div>)
         }else{

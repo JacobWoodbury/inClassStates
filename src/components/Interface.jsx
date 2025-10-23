@@ -12,7 +12,7 @@ export default function Interface({updateCurrentSeed, addDirt, waterPlants, curr
             </div>
             <div>
                 <h2>Shop?</h2>
-                <button onClick={()=>{addDirt()}}>New plot</button>
+                <button onClick={addDirt()}>New plot</button>
             </div>
             <div>
                 <h2>Tools?</h2>

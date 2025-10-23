@@ -50,7 +50,6 @@ export default function Game(){
             }))
 
         })
-        checkWin(farmItems)
     }
     
     function updateCurrentSeed(plant){
@@ -87,7 +86,7 @@ export default function Game(){
 
     return(
         <>
-            {isWinner? <div> <Winner func={showWinPage}/></div> :
+            {checkWin()? <div> <Winner func={showWinPage}/></div> :
             <main>
                 <div className="description">
                     <h3>This is our game, click a seed, then a square to plant in it.</h3>
